@@ -1,0 +1,13 @@
+digraph G {
+"camera_link" -> "camera_depth_frame"[label="Broadcaster: /camera_base_link\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1557127810.033 sec old)\nBuffer length: 0.000 sec\n"];
+"base_link" -> "camera_link"[label="Broadcaster: /base_link_to_camera\nAverage rate: 10.192 Hz\nMost recent transform: 1557127810.130 ( -0.097 sec old)\nBuffer length: 4.906 sec\n"];
+"camera_link" -> "camera_rgb_frame"[label="Broadcaster: /camera_base_link1\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1557127810.033 sec old)\nBuffer length: 0.000 sec\n"];
+"camera_depth_frame" -> "camera_depth_optical_frame"[label="Broadcaster: /camera_base_link2\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1557127810.033 sec old)\nBuffer length: 0.000 sec\n"];
+"camera_rgb_frame" -> "camera_rgb_optical_frame"[label="Broadcaster: /camera_base_link3\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1557127810.033 sec old)\nBuffer length: 0.000 sec\n"];
+"odom" -> "base_link"[label="Broadcaster: /link\nAverage rate: 10.205 Hz\nMost recent transform: 1557127810.022 ( 0.012 sec old)\nBuffer length: 4.900 sec\n"];
+"map" -> "odom"[label="Broadcaster: /amcl\nAverage rate: 30.200 Hz\nMost recent transform: 1557127811.018 ( -0.985 sec old)\nBuffer length: 4.967 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1557127810.033"[ shape=plaintext ] ;
+ }->"map";
+}
