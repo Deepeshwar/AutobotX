@@ -1,0 +1,22 @@
+<?xml version="1"?>
+<launch>
+
+ <include file="$(find autobotx)/launch/base_controller.launch">
+ </include>
+
+  <include file="$(find autobotx)/launch/kinect.launch">
+ </include>
+
+ <!--include file="$(find autobotx)/launch/gmap_slam.launch">
+</include-->
+
+<node pkg="tf" type="static_transform_publisher" name="base_link_to_camera" args="0.28 0 0.21 0 0 0 /base_link /camera_link 100"/>
+
+  <include file="$(find autobotx)/launch/amcl.launch">
+</include>
+
+ <include file="$(find autobotx)/launch/nav_goal.launch">
+</include>
+
+ <node type="rviz" name="rviz" pkg="rviz" args="-d $(find autobotx)/rviz/common.rviz" />
+</launch>

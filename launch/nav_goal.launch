@@ -1,0 +1,33 @@
+<?xml version="1"?>
+
+<launch>
+  <master auto="start"/>
+
+  <!-- Run patrick -->
+  <!--include file="$(find my_personal_robotic_companion)/launch/urdf.launch" /-->
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find autobotx)/map/lab1.yaml" output="screen"/>
+
+  <!--node name="map_server" pkg="map_server" type="map_server" args="$(find autobotx)/map/swami_v02.pgm 0.05"/-->
+
+  <!-- Run AMCL -->
+  <!--include file="$(find autobotx)/launch/amcl_diff.launch" /-->
+
+  <!-- Set cmd_vel mux to listen to cmd_vel instead of teleop -->
+  <!--node name="mux_select" pkg="topic_tools" type="mux_select" args="mux cmd_vel"/-->
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find autobotx)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find autobotx)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find autobotx)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find autobotx)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find autobotx)/param/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find autobotx)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find autobotx)/param/global_planner_params.yaml" command="load" />
+    <rosparam file="$(find autobotx)/param/navfn_global_planner_params.yaml" command="load" />
+  </node>
+
+  <!--node name="teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen" launch-prefix="xterm -e"/-->
+
+  <!--node type="rviz" name="rviz" pkg="rviz" args="-d $(find autobotx)/rviz/common.rviz" /-->
+</launch>
